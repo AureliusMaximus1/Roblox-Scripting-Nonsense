@@ -16,6 +16,20 @@ ProximityPromptService.PromptShown:Connect(function(Proximity)
         if not success then
             warn(error)
         end
+        local function PromptHoldBegan(prompt, Player)
+              if prompt.Name == "Reader" then
+                local ProximityPart = prompt.Parent
+                
+                
+    end
+        end
+    end
+end)
+
+ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt, playerWhoTriggered)
+    if prompt.Name == "Reader" then
+        local ProximityPart = prompt.Parent
+
     end
 end)
 
