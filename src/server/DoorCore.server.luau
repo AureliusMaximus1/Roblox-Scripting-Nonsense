@@ -20,7 +20,7 @@ local function DoorActivated(Player, Door)
     -- Example action: Print player name and door name
     print(Player.Name .. " activated the door: " .. Door.Name)
     local Clearance = Door:GetAttribute("Clearance")
-   -- if DoorRunner.Permissions[Clearance](Player) then
+   if DoorRunner.Permissions[Clearance](Player) then
 
         print("Access Granted")
         if DoorRunner.DoorTypes[Door.Name] then
@@ -32,9 +32,9 @@ local function DoorActivated(Player, Door)
         else
             warn("Unknown door type: " .. Door.Name)
         end
---- else
-   -- print("Access Denied")
- --end
+ else
+    print("Access Denied")
+ end
 end
 DoorEvent.OnServerEvent:Connect(function(Player, Door)
     DoorActivated(Player, Door)
