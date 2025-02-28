@@ -33,10 +33,10 @@ DoorRunner.DoorTypes = {
 
 
 DoorRunner.Clearances = {
-   ["MTF Clearnace"] = {
+   ["MTF Clearance"] = {
     GroupID = 4096130
    },
-   ["Ethics Clearnace"] = {
+   ["Ethics Clearance"] = {
     GroupID = 4095963
    }
    -- Add more clearances here
