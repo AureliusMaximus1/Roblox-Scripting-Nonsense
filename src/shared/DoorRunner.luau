@@ -21,11 +21,11 @@ DoorRunner.DoorTypes = {
 
     SwingDoor = {
         Open = function(Door)
-            local DoorTween = TweenService:Create(Door, TweenInfo.new(3, Enum.EasingStyle.Back, Enum.EasingDirection.In, 0, false, 0), {CFrame = Door.CFrame * CFrame.Angles(math.rad(90), 0, 0)})
+            local DoorTween = TweenService:Create(Door.Swivel, TweenInfo.new(3, Enum.EasingStyle.Back, Enum.EasingDirection.In, 0, false, 0), {CFrame = Door.Swivel.CFrame * CFrame.Angles(math.rad(90), 0, 0)})
             DoorTween:Play()
         end,
         Close = function(Door)
-            local DoorTween = TweenService:Create(Door, TweenInfo.new(3, Enum.EasingStyle.Back, Enum.EasingDirection.In, 0, false, 0), {CFrame = Door.CFrame / CFrame.Angles(math.rad(90), 0, 0)})
+            local DoorTween = TweenService:Create(Door.Swivel, TweenInfo.new(3, Enum.EasingStyle.Back, Enum.EasingDirection.In, 0, false, 0), {CFrame = Door.Swivel.CFrame * CFrame.Angles(math.rad(-90), 0, 0)})
             DoorTween:Play()
         end
     }

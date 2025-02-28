@@ -3,7 +3,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 local localPlayer = Players.LocalPlayer
 local Events = ReplicatedStorage.Events
-local DoorEvent = Events.DoorEvent
 
 local ProximityGUI = ReplicatedStorage:WaitForChild("ProximityPrompts")
 
@@ -28,12 +27,3 @@ ProximityPromptService.PromptHidden:Connect(function(Proximity)
         end
     end
 end)
-
-local function ProxInput(Proximity)
-    if Proximity.Name == "Reader" then
-        print("Prox Triggered")
-        DoorEvent:FireServer(Proximity.Parent.Parent)
-    end
-end
-
-ProximityPromptService.PromptTriggered:Connect(ProxInput)
