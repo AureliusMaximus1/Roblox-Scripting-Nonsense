@@ -12,7 +12,6 @@ local function IsPlayerInGroup(Player, GroupID)
 end
 
 local function checkPlayerClearance(Player, requiredClearances)
-    -- Loop through each required clearance for the door
     for _, clearance in ipairs(requiredClearances) do
         local clearanceInfo = DoorRunner.Clearances[clearance]
         if clearanceInfo and IsPlayerInGroup(Player, clearanceInfo.GroupID) then
