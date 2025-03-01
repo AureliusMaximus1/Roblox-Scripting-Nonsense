@@ -9,6 +9,7 @@ local promptDisabled = false
 
 ProximityPromptService.PromptShown:Connect(function(Proximity)
     if Proximity.Name == "Reader" then
+        print("Prompt Shown")
         local success, error = pcall(function()
             local existingGUI = localPlayer.PlayerGui:FindFirstChild("FrontPromptGUI")
             if existingGUI then
@@ -50,10 +51,9 @@ ProximityPromptService.PromptHidden:Connect(function(Proximity)
     if Proximity.Name == "Reader" then
         print("Prompt Hidden")
         local ProxGUIClone = localPlayer.PlayerGui:FindFirstChild("FrontPromptGUI")
-        if ProxGUIClone and not promptDisabled then
+        if ProxGUIClone then
             print("Destroying GUI")
             ProxGUIClone:Destroy()
         end
-        promptDisabled = false
     end
 end)

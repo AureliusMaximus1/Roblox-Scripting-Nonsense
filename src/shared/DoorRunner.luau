@@ -1,8 +1,11 @@
 local DoorRunner = {}
 local TweenService = game:GetService("TweenService")
 
+DoorRunner.DoorsInUse = {}
+
 DoorRunner.DoorTypes = {
     DoubleSlidingDoor = {
+        
         Open = function(Door)
             local DoorTween1 = TweenService:Create(Door.Right, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0), {CFrame = Door.Right.CFrame * CFrame.new(0, 0, 3)})
             DoorTween1:Play()
@@ -14,8 +17,15 @@ DoorRunner.DoorTypes = {
             DoorTween1:Play()
             local DoorTween2 = TweenService:Create(Door.Left, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0), {CFrame = Door.Left.CFrame * CFrame.new(0, 0, 3)})
             DoorTween2:Play()
-        end
-   
+            DoorTween2.Completed:Connect(function()
+                for i, DoorNumber in ipairs(DoorRunner.DoorsInUse) do
+                    if DoorNumber == Door then
+                        table.remove(DoorRunner.DoorsInUse, i)
+                    end
+                end
+            end)
+       
+    end,
     },
 
     SwingDoor = {
@@ -28,6 +38,7 @@ DoorRunner.DoorTypes = {
             DoorTween:Play()
         end
     }
+    -- Add more door types here
     
 }
 
@@ -37,25 +48,25 @@ DoorRunner.Clearances = {
     GroupID = 4096130
    },
    ["Ethics Clearance"] = {
-    GroupID = 4095963
+    GroupID = 32011413
    }
+
    -- Add more clearances here
 }
 
 DoorRunner.UITweens = {
     FillIn = function(UI, PromptTime)
-        local Tween = TweenService:Create(UI, TweenInfo.new(PromptTime, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0), {Size = UDim2.new(1, 0, -1, 0)})
+        local Tween = TweenService:Create(UI, TweenInfo.new(PromptTime, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0), {Size = UDim2.new(1, 0, -1, 0)})
         Tween:Play()
 
         DoorRunner.CancelTween = function(Prompt)
-            Tween:Cancel()
             Prompt.Enabled = false
-            local CancelTween = TweenService:Create(UI, TweenInfo.new(.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0), {Size = UDim2.new(1, 0, 0, 0)})
+            Tween:Cancel()
+            local CancelTween = TweenService:Create(UI, TweenInfo.new(.5, Enum.EasingStyle.Linear, Enum.EasingDirection.In, 0, false, 0), {Size = UDim2.new(1, 0, 0, 0)})
             CancelTween:Play()
-            CancelTween.Completed:Connect(function()
-               Prompt.Enabled = true
+            CancelTween.completed:Connect(function()
+                Prompt.Enabled = true
             end)
-    
         end
         
     end

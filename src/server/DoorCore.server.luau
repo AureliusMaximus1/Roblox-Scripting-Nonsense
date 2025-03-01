@@ -4,6 +4,8 @@ local EventsFolder = replicatedStorage.Events
 local DoorRunner = require(replicatedStorage.Shared.DoorRunner)
 local DoorsFolder = workspace.Doors
 
+
+
 local function IsPlayerInGroup(Player, GroupID)
     if Player and GroupID then
         return Player:IsInGroup(GroupID)
@@ -25,7 +27,6 @@ end
 
 local function ProximityTriggered(Prompt, Player)
     if Prompt.Name == "Reader" then
-        Prompt.Enabled = false
         local Door = Prompt.Parent.Parent
         local DoorPermissions = require(Door:WaitForChild("Clearances"))
         print("working")
@@ -35,7 +36,16 @@ local function ProximityTriggered(Prompt, Player)
         if checkPlayerClearance(Player, requiredClearances) then
             warn("You have the required clearance to open this door.")
                 if DoorRunner.DoorTypes[Door.Name] then
+                    if table.find(DoorRunner.DoorsInUse, Door) then
+                        warn("This door is already in use.")
+                        return
+                    end
                     DoorRunner.DoorTypes[Door.Name].Open(Door)
+                    table.insert(DoorRunner.DoorsInUse, Door)
+                    print(DoorRunner.DoorsInUse)
+                    wait(5)
+                    DoorRunner.DoorTypes[Door.Name].Close(Door)
+                    wait(5)
              else
                 warn("This door type is not supported.")
                 return
