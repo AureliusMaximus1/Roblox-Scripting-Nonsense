@@ -17,27 +17,21 @@ ProximityPromptService.PromptShown:Connect(function(Proximity)
             warn(error)
         end
         local function PromptHoldBegan(prompt, Player)
-              if prompt.Name == "Reader" then
-                local ProximityPart = prompt.Parent
-                
-                
-    end
-        end
-    end
+            if prompt.Name == "Reader" then
+              local ProximityPart = prompt.Parent
+              
+              
+  end
+      end
+  end
 end)
 
-ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt, playerWhoTriggered)
-    if prompt.Name == "Reader" then
-        local ProximityPart = prompt.Parent
-
-    end
-end)
 
 ProximityPromptService.PromptHidden:Connect(function(Proximity)
     if Proximity.Name == "Reader" then
         local ProxGUIClone = localPlayer.PlayerGui:FindFirstChild("ProximityPrompts")
         if ProxGUIClone then
-           
+            ProxGUIClone:Destroy()
         end
     end
 end)
