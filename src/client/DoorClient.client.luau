@@ -23,7 +23,7 @@ ProximityPromptService.PromptHidden:Connect(function(Proximity)
     if Proximity.Name == "Reader" then
         local ProxGUIClone = localPlayer.PlayerGui:FindFirstChild("ProximityPrompts")
         if ProxGUIClone then
-            ProxGUIClone:Destroy()
+           
         end
     end
 end)
