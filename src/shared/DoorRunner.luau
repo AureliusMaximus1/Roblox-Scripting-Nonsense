@@ -41,4 +41,23 @@ DoorRunner.Clearances = {
    }
    -- Add more clearances here
 }
+
+DoorRunner.UITweens = {
+    FillIn = function(UI, PromptTime)
+        local Tween = TweenService:Create(UI, TweenInfo.new(PromptTime, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0), {Size = UDim2.new(1, 0, -1, 0)})
+        Tween:Play()
+
+        DoorRunner.CancelTween = function(Prompt)
+            Tween:Cancel()
+            Prompt.Enabled = false
+            local CancelTween = TweenService:Create(UI, TweenInfo.new(.5, Enum.EasingStyle.Sine, Enum.EasingDirection.In, 0, false, 0), {Size = UDim2.new(1, 0, 0, 0)})
+            CancelTween:Play()
+            CancelTween.Completed:Connect(function()
+               Prompt.Enabled = true
+            end)
+    
+        end
+        
+    end
+}
 return DoorRunner
